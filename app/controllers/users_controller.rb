@@ -12,14 +12,13 @@ class UsersController < ActionController::API
     if user
       if user.valid_password?(params[:password])
         success = true
+        message = "Successful sign in"
       else
         success = false
         message = "Invalid password"
       end
     else
-      user = User.create(email: params[:email].downcase,
-                  password: params[:password],
-                  password_confirmation: params[:password])
+      user = User.create(email: params[:email].downcase, password: params[:password], password_confirmation: params[:password])
       message = "Successfully created account"
       success = true
     end
